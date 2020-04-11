@@ -18,5 +18,5 @@ func New() (*Chi, *chipkg.Mux) {
 }
 
 func (c *Chi) AddRoute(method string, path string, handler http.HandlerFunc) {
-	c.router.HandleFunc(path, handler)
+	c.router.Method(method, path, handler)
 }

@@ -1,7 +1,6 @@
 package rte
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -33,8 +32,6 @@ func (route *Route) first(next func(*Default, interface{})) func(http.ResponseWr
 			W:     w,
 			start: time.Now().UnixNano(),
 		}
-		fmt.Println(d)
-		fmt.Println(route)
 		next(d, route.input)
 		d.end = time.Now().UnixNano()
 		d.duration = d.end - d.start
