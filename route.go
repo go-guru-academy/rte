@@ -28,13 +28,13 @@ type Route struct {
 func (route *Route) first(next func(*Default, interface{})) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		d := &Default{
-			R:     r,
-			W:     w,
-			start: time.Now().UnixNano(),
+			R:            r,
+			W:            w,
+			requestStart: time.Now().UnixNano(),
 		}
 		next(d, route.input)
-		d.end = time.Now().UnixNano()
-		d.duration = d.end - d.start
+		d.requestEnd = time.Now().UnixNano()
+		d.requestDuration = d.requestEnd - d.requestStart
 	}
 }
 
