@@ -16,7 +16,7 @@ type MyInput struct {
 
 func main() {
 	fmt.Println("example-01: started")
-	r, _ := rte.New(rte.GORILLA)
+	r := rte.New(rte.GORILLA)
 	r.Get("/example", example, &MyInput{}, []rte.Middleware{
 		middleware01,
 		middleware02,

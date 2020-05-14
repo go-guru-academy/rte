@@ -1,7 +1,6 @@
 package rte
 
 import (
-	"errors"
 	"net/http"
 
 	"github.com/go-guru-academy/rte/routers/chi"
@@ -27,7 +26,7 @@ type Router interface {
 	AddRoute(method string, path string, handler http.HandlerFunc)
 }
 
-func New(routerPkg int) (*Rte, error) {
+func New(routerPkg int) *Rte {
 	r := &Rte{}
 	switch routerPkg {
 	case GORILLA:
@@ -35,9 +34,9 @@ func New(routerPkg int) (*Rte, error) {
 	case CHI:
 		r.router, r.handler = chi.New()
 	default:
-		return nil, errors.New("rte-error: invalid router type")
+		panic("rte-error: invalid router type")
 	}
-	return r, nil
+	return r
 }
 
 // Returns the configured router instance
